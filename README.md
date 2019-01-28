@@ -12,4 +12,11 @@ java -jar demo-cloud-mesh/ms1/target/serverless-1.0-SNAPSHOT.jar --server.port=8
 open in browser <br>
 http://localhost:8761/
 
-you have to find details similar to picture https://github.com/mikesockor/demo-cloud-mesh/blob/master/readme-pic-1.PNG
+you have to find details as follows
+```
+Instances currently registered with Eureka
+Application	AMIs	Availability Zones	Status
+SERVERLESS-EXAMPLE	n/a (2)	(2)	UP (2) - 
+NB3021821768.corp.emirates.com:serverless-example:8082 , 
+NB3021821768.corp.emirates.com:serverless-example:8081
+```

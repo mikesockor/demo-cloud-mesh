@@ -12,4 +12,4 @@ java -jar demo-cloud-mesh/ms1/target/serverless-1.0-SNAPSHOT.jar --server.port=8
 open in browser 
 http://localhost:8761/
 
-you have to find details similar to picture 
+you have to find details similar to picture https://github.com/mikesockor/demo-cloud-mesh/blob/master/readme-pic-1.PNG

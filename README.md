@@ -20,3 +20,24 @@ SERVERLESS-EXAMPLE	n/a (2)	(2)	UP (2) -
 NB3021821768.corp.emirates.com:serverless-example:8082 , 
 NB3021821768.corp.emirates.com:serverless-example:8081
 ```
+
+### 1 day
+
+open in browser <br>
+http://localhost:8761/
+
+find 3 instances (2 of microservice1, 1 of gateway)
+
+get direct access to microservice1
+```
+http://localhost:8081/hello
+http://localhost:8081/hello,uppercase
+```
+
+get access to microservice1 though GATEWAY
+```
+http://localhost:8080/SERVERLESS-EXAMPLE/hello
+http://localhost:8080/SERVERLESS-EXAMPLE/hello,uppercase
+```
+
+have same result   

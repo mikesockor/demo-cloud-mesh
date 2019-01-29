@@ -35,3 +35,4 @@ generated-docs/
 *.EAP
 .DS_Store
 pom.xml.releaseBackup
+/.idea/vcs.xml

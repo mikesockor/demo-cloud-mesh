@@ -43,3 +43,32 @@ http://localhost:8080/SERVERLESS-EXAMPLE/hello,uppercase
 have same result   
 
 read https://www.baeldung.com/spring-cloud-gateway <br>
+
+## day 3
+
+### local props
+start MS1
+```
+http://localhost:8081/config
+local properties has been used
+```
+
+### configuration server
+
+using command line arguments   
+`--spring.cloud.config.server.git.username=S750976 --spring.cloud.config.server.git.password=*******` 
+to get access to git under your creds
+
+get access to config server content being stored
+```
+http://localhost:7777/serverless-example/default
+{"name":"serverless-example","profiles":["default"],"label":null,"version":"a6f20a7f6559e46fdc03a4114d9775030d2e3b7a","state":null,"propertySources":[{"name":"https://github.com/mikesockor/demo-cloud-mesh/cp/serverless-example.properties","source":{"info.foo":"GITHUB properties has been used, that is great by the way"}}]}
+```
+
+### GIT props
+```
+http://localhost:8081/config
+GITHUB properties has been used, that is great by the way
+```
+
+read https://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.3.RELEASE/multi/multi__spring_cloud_config_server.html

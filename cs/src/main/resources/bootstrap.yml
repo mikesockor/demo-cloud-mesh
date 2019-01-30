@@ -3,8 +3,6 @@ spring:
     name: configuration-server
   main:
     banner-mode: 'OFF'
-  profiles:
-    active: native
   cloud:
     config:
       enabled: true
@@ -18,7 +16,7 @@ spring:
       enabled: ALWAYS
 
 server:
-  port: ${PORT:8888}
+  port: ${PORT:7777}
 
 eureka:
   client:

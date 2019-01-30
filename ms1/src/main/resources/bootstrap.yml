@@ -3,6 +3,12 @@ spring:
     name: serverless-example
   main:
     banner-mode: 'OFF'
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        serviceId: CONFIGURATION-SERVER
+      uri: ${SPRING_CONFIG_URI:http://localhost:7777}
 
 eureka:
   client:

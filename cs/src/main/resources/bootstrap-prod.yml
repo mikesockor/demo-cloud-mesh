@@ -3,16 +3,14 @@ spring:
     name: configuration-server
   main:
     banner-mode: 'OFF'
-#local mode
-  profiles:
-    active: native
   cloud:
     config:
       enabled: true
       server:
-#local mode
-        native:
-          searchLocations: cp
+        git:
+          uri: ${PROPERTY_GIT_URI:https://github.com/mikesockor/demo-cloud-mesh}
+          searchPaths: cp
+          label: master
 
   output:
     ansi:

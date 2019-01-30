@@ -21,7 +21,7 @@ NB3021821768.corp.emirates.com:serverless-example:8082 ,
 NB3021821768.corp.emirates.com:serverless-example:8081
 ```
 
-### 1 day
+### 2 day
 
 open in browser <br>
 http://localhost:8761/
@@ -41,3 +41,5 @@ http://localhost:8080/SERVERLESS-EXAMPLE/hello,uppercase
 ```
 
 have same result   
+
+read https://www.baeldung.com/spring-cloud-gateway <br>

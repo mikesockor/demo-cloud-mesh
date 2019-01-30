@@ -20,8 +20,8 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 /**
  * The type Config service application.
  */
+
 @EnableDiscoveryClient
-@EnableHystrix
 @SpringBootApplication
 public class MeshGatewayApplication {
 

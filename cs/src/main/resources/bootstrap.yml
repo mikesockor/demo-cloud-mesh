@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: configuration-server
+  main:
+    banner-mode: 'OFF'
+  profiles:
+    active: native
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          uri: ${PROPERTY_GIT_URI:https://github.com/mikesockor/demo-cloud-mesh}
+          searchPaths: cp
+          label: master
+  output:
+    ansi:
+      enabled: ALWAYS
+
+server:
+  port: ${PORT:8888}
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true

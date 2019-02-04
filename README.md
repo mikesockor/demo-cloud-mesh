@@ -46,14 +46,14 @@ read https://www.baeldung.com/spring-cloud-gateway <br>
 
 ## day 3
 
-### local props
+#### local props
 start MS1
 ```
 http://localhost:8081/config
 local properties has been used
 ```
 
-### configuration server
+#### configuration server
 
 using command line arguments   
 `--spring.cloud.config.server.git.username=S750976 --spring.cloud.config.server.git.password=*******` 
@@ -65,7 +65,7 @@ http://localhost:7777/serverless-example/default
 {"name":"serverless-example","profiles":["default"],"label":null,"version":"a6f20a7f6559e46fdc03a4114d9775030d2e3b7a","state":null,"propertySources":[{"name":"https://github.com/mikesockor/demo-cloud-mesh/cp/serverless-example.properties","source":{"info.foo":"GITHUB properties has been used, that is great by the way"}}]}
 ```
 
-### GIT props
+#### GIT props
 ```
 http://localhost:8081/config
 GITHUB properties has been used, that is great by the way
@@ -77,7 +77,7 @@ read https://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.3.RELEA
 
 run all OSS services (config-server, gateway-server, service-discovery)
 
-### small example
+#### small example
 
 run all small services (microservice, ui)
 get access to
@@ -100,12 +100,11 @@ http://localhost:8080/fullProfilesClient
 communication will happen as follows <br>
 browser -> gateway -> service-discovery -> ui-service -> service-discovery -> gateway -> service-discovery -> small-microservice-example  
           
-### extended example 
+#### extended example 
 
 run all extended services (sale, airport, flight, ui)
 get access to
 ```
 http://localhost:8080/
-http://localhost:8086/
 ```
 make search from MIA to JAX, play with dates

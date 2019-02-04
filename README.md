@@ -1,4 +1,4 @@
-# Microservice service mesh demo implementation
+# Repository for training purpose due "emirates.com cross skilled training sessions" 2019
 
 This repository contains Mesh Server (Eureka), service examples
 
@@ -72,3 +72,40 @@ GITHUB properties has been used, that is great by the way
 ```
 
 read https://cloud.spring.io/spring-cloud-static/spring-cloud-config/1.3.3.RELEASE/multi/multi__spring_cloud_config_server.html
+
+## last day (service-to-service communication)
+
+run all OSS services (config-server, gateway-server, service-discovery)
+
+### small example
+
+run all small services (microservice, ui)
+get access to
+```
+http://localhost:8080/ui-example/helloClient  
+http://localhost:8080/ui-example/helloBuilder
+http://localhost:8080/ui-example/wordsClient
+http://localhost:8080/ui-example/profilesClient
+```
+function composition in UI level
+```
+http://localhost:8086/wordsClient,uppercase
+```
+
+function composition in downstream service level
+```
+http://localhost:8080/fullProfilesClient
+```
+
+communication will happen as follows <br>
+browser -> gateway -> service-discovery -> ui-service -> service-discovery -> gateway -> service-discovery -> small-microservice-example  
+          
+### extended example 
+
+run all extended services (sale, airport, flight, ui)
+get access to
+```
+http://localhost:8080/
+http://localhost:8086/
+```
+make search from MIA to JAX, play with dates

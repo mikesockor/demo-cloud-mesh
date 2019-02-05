@@ -24,7 +24,7 @@ public class AirportsService {
             InputStream inputStream = AirportsService.class.getResourceAsStream("/airports.csv");
             CSVReader reader = new CSVReader(new InputStreamReader(inputStream), '\t');
 
-            airports = reader.readAll().stream()
+            airports = reader.readAll().parallelStream()
                 .map(nextLine -> {
                     Airport airport = new Airport();
                     airport.setName(nextLine[0]);

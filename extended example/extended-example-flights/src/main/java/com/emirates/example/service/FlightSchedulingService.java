@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 class FlightSchedulingService {
+    private static Logger                            logger           = Logger.getLogger(FlightSchedulingService.class.getName());
     private static Map<String, List<FlightSchedule>> departingFlights = new HashMap<>();
     private static Map<String, List<FlightSchedule>> arrivingFlights  = new HashMap<>();
 
@@ -26,21 +28,25 @@ class FlightSchedulingService {
         if (departingFlights.isEmpty()) {
             InputStream inputStream = FlightSchedulingService.class.getResourceAsStream("/flights.csv");
             CSVReader reader = new CSVReader(new InputStreamReader(inputStream), '\t');
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                FlightSchedule flightSchedule = new FlightSchedule();
-                flightSchedule.setFlightNumber(nextLine[1]);
+            reader.readAll().parallelStream()
+                .map(nextLine -> {
+                    FlightSchedule flightSchedule = new FlightSchedule();
+                    flightSchedule.setFlightNumber(nextLine[1]);
+                    flightSchedule.setDepartureAirport(nextLine[2]);
+                    flightSchedule.setDepartureTime(LocalTime.parse(nextLine[3], formatter));
+                    flightSchedule.setArrivalAirport(nextLine[4]);
+                    flightSchedule.setArrivalTime(LocalTime.parse(nextLine[5], formatter));
+                    return flightSchedule;
+                })
+                .forEach(flightSchedule -> {
+                    departingFlights.computeIfAbsent(flightSchedule.getDepartureAirport(), s -> new ArrayList<>()).add(flightSchedule);
+                    arrivingFlights.computeIfAbsent(flightSchedule.getArrivalAirport(), s -> new ArrayList<>()).add(flightSchedule);
+                });
+            logger.info("Populated " + departingFlights.size() + " departingFlights");
+            logger.info("Populated " + arrivingFlights.size() + " arrivingFlights");
 
-                flightSchedule.setDepartureAirport(nextLine[2]);
-                flightSchedule.setDepartureTime(LocalTime.parse(nextLine[3], formatter));
-
-                flightSchedule.setArrivalAirport(nextLine[4]);
-                flightSchedule.setArrivalTime(LocalTime.parse(nextLine[5], formatter));
-
-                departingFlights.computeIfAbsent(flightSchedule.getDepartureAirport(), s -> new ArrayList<>()).add(flightSchedule);
-                arrivingFlights.computeIfAbsent(flightSchedule.getArrivalAirport(), s -> new ArrayList<>()).add(flightSchedule);
-            }
         }
     }
 

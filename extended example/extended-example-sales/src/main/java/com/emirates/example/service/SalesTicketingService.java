@@ -12,8 +12,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 class SalesTicketingService {
+    private static       Logger                logger           = Logger.getLogger(SalesTicketingService.class.getName());
     private static final double                extraHopDiscount = 0.9;
     private static final double                layoverDiscount  = 0.9;
     private static       Map<Integer, Pricing> pricingMap       = new HashMap<>();
@@ -22,17 +25,21 @@ class SalesTicketingService {
         if (pricingMap.isEmpty()) {
             InputStream inputStream = SalesTicketingService.class.getResourceAsStream("/pricing.csv");
             CSVReader reader = new CSVReader(new InputStreamReader(inputStream), '\t');
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                Pricing pricing = new Pricing();
-                pricing.flightNumber = Integer.parseInt(nextLine[0]);
-                pricing.basePrice = Integer.parseInt(nextLine[1]);
-                pricing.availability = new int[nextLine.length - 2];
-                for (int index = 2; index < nextLine.length; index++) {
-                    pricing.availability[index - 2] = Integer.parseInt(nextLine[index]);
-                }
-                pricingMap.put(pricing.flightNumber, pricing);
-            }
+
+            pricingMap = reader.readAll().parallelStream()
+                .map(nextLine -> {
+                    Pricing pricing = new Pricing();
+                    pricing.flightNumber = Integer.parseInt(nextLine[0]);
+                    pricing.basePrice = Integer.parseInt(nextLine[1]);
+                    pricing.availability = new int[nextLine.length - 2];
+                    for (int index = 2; index < nextLine.length; index++) {
+                        pricing.availability[index - 2] = Integer.parseInt(nextLine[index]);
+                    }
+                    return pricing;
+                })
+                .collect(Collectors.toMap(p -> p.flightNumber, e -> e));
+
+            logger.info("Populated " + pricingMap.size() + " prices");
         }
     }
 

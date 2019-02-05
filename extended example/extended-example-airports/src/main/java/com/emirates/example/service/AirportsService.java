@@ -35,8 +35,7 @@ public class AirportsService {
                     airport.setZoneId(nextLine[10]);
                     return airport;
                 })
-                .collect(Collectors.toMap(Airport::getCode, e -> e)
-                )
+                .collect(Collectors.toMap(Airport::getCode, e -> e))
             ;
             logger.info("Populated " + airports.size() + " airports");
         }

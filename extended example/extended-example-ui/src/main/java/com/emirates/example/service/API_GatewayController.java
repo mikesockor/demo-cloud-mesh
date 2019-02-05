@@ -37,11 +37,14 @@ import rx.Observable;
 @org.springframework.web.bind.annotation.RestController
 @RibbonClients({ @RibbonClient(name = "airports"), @RibbonClient(name = "flights"), @RibbonClient(name = "sales") })
 public class API_GatewayController {
-    private static Logger       logger = Logger.getLogger(API_GatewayController.class.getName());
+
+    private static Logger logger = Logger.getLogger(API_GatewayController.class.getName());
+
     @Autowired
-    private        RestTemplate restTemplate;
+    private RestTemplate restTemplate;
+
     @Value("${hystrix.threadpool.SalesThreads.coreSize}")
-    private        int          threadSize;
+    private int threadSize;
 
     private static void populateFormattedTimes(Flight[] flights, Map<String, Airport> airports) {
         for (Flight flight : flights) {
@@ -60,8 +63,8 @@ public class API_GatewayController {
         return formatter.format(departureTime);
     }
 
-    @LoadBalanced
     @Bean
+    @LoadBalanced
     RestTemplate restTemplate() {
         return new RestTemplate();
     }

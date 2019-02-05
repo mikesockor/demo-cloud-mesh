@@ -29,4 +29,5 @@ logging:
 
 gateway:
   ribbon:
-    listOfServers: gateway:8080
+    eureka:
+      enabled: true

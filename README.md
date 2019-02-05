@@ -6,6 +6,7 @@ This repository contains Netflix OSS stack, microservice examples
 - gateway service is entry point (API PROXI)
 - load balanced communications between services will happened though gateway
 - services use functional approach, spring-cloud-function to expose endpoints
+- extended example use reactive stack + ui in imperative, small example fully reactive
    
 
 ### 1 day (service discovery)
